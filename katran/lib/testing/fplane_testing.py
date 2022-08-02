@@ -177,8 +177,7 @@ def parse_args():
         action="store_true",
         help="print verbose info about recved pckts"
     )
-    args = parser.parse_args()
-    return args
+    return parser.parse_args()
 
 
 class FplaneTester(object):
@@ -191,7 +190,7 @@ class FplaneTester(object):
         self._queue = queue
 
     def sniff_packets(self):
-        pcap_filter = "ether src host {}".format(self._katran_mac)
+        pcap_filter = f"ether src host {self._katran_mac}"
         sniff(filter=pcap_filter, iface=self._iface,
               prn=self.process_received_packet)
 

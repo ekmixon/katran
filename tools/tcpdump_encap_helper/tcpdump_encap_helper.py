@@ -65,12 +65,8 @@ def modify_filter(tcpdump_filters, value, offset, size, v6=False):
     @param bool v6 flag if the filter is related to ipv6 packet
     @return modified tcpdump_filter
     """
-    packet_type = "ip"
-    if v6:
-        packet_type = "ip6"
-    tcpdump_filters.append(
-        "({}[{}:{}] == {} )".format(packet_type, offset, size, value)
-    )
+    packet_type = "ip6" if v6 else "ip"
+    tcpdump_filters.append(f"({packet_type}[{offset}:{size}] == {value} )")
     return tcpdump_filters
 
 
